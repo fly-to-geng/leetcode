@@ -1,0 +1,81 @@
+# [1. 两数之和](https://leetcode-cn.com/problems/two-sum/submissions/)
+
+
+## 题目描述
+
+给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
+
+**示例**
+
+```cpp
+给定 nums = [2, 7, 11, 15], target = 9
+
+因为 nums[0] + nums[1] = 2 + 7 = 9
+所以返回 [0, 1]
+```
+
+## 解题思路
+
+### O(n^2)
+
+两次遍历，求解出每两个数的和与target比较，找到就返回结果。
+
+### O(n)
+
+利用哈希表存储位置和值的对应关系，把`nums`依次存储到哈希表，每次存储的时候，先判断`target - nums[i]`是否在哈希表中，
+如果在，说明之前存储过`target - nums[i]`, 返回；否则，存到哈希表中`map[nums[i] = i`.
+
+## 题解
+
+### C++
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <map>
+
+using namespace std;
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> ans(2, -1);
+        map<int, int> hashMap;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            // pairs = (nums[i], target - nums[i])
+            // 如果pairs[1]在hashMap中,说明pairs[0]已经被添加过了，pairs[0]应该在pairs[1]前面
+            if (hashMap.count(target - nums[i]) > 0)
+            {
+                ans[0] = hashMap[ target - nums[i] ];
+                ans[1] = i;
+                return ans;
+            }
+            // 如果没有，存到hashMap中
+            hashMap[ nums[i] ] = i;
+        }
+
+        // 如果都存到hashMap中还是没有在循环中return, 说明没有
+        return ans;      
+    }
+};
+```
+
+### Python
+
+```python
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        ans = [-1, -1]
+        hashMap = {}
+        for i, val in enumerate(nums):
+            if target-val in hashMap:
+                ans[0] = hashMap[target - val]
+                ans[1] = i
+                return ans
+            hashMap[val] = i
+            
+        return ans
+```

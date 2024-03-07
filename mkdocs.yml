@@ -1,0 +1,74 @@
+site_name: FEIFEI
+
+# show source code and eidt button
+repo_name: FF1204/leetcode
+repo_url: https://github.com/FF1204/leetcode
+# https://squidfunk.github.io/mkdocs-material/extensions/pymdown/
+markdown_extensions:
+  - markdown.extensions.admonition
+  - pymdownx.tabbed
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed
+  - pymdownx.tilde
+  - codehilite:
+      guess_lang: false
+      linenums: true
+  - markdown.extensions.toc:
+      permalink: true
+theme: 
+    name: material 
+    language: zh
+    custom_dir: theme
+    palette:
+        primary: teal
+        accent: indigo
+
+# 数学公式的显示 
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
+
+plugins:
+  # http://wyqbailey.github.io/2015/08/13/make-mkdocs-support-chinese.html
+  - search
+  # 该插件可以定义导航栏菜单出现，不出现哪些文件内容
+  # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin/blob/master/README.md
+  - awesome-pages
+  # generate sigle pdf with menu
+  #- mkpdfs
+  - add-number:
+        strict_mode: False
+        order: 2
+        excludes:
+            - sql/
+            - command/rsync
+        includes:
+            - sql/MySQL
+  - render-otherfile:
+      ext:
+          - .c
+          - .cpp
+          - .py
+  # 该插件可以屏蔽特定的文件和文件夹不生成
+  #- exclude:
+      #glob:
+        #- exclude/this/path/*
+        #- "*.c"
+        #- "*.cpp"
+        #- "*.py"
+      #regex:
+        #- '.*\.(tmp|bin|tar)$'

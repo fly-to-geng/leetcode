@@ -1,0 +1,4 @@
+tmp/
+site/
+.pytest_cache/
+*.o
